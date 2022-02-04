@@ -352,4 +352,3 @@ labelBalance.addEventListener('click', function () {
 });
 
 // Numeric Separators
-console.log('hi');
