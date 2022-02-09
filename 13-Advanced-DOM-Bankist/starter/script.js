@@ -33,4 +33,91 @@ document.addEventListener('keydown', function (e) {
     }
 });
 
-// console.log('hello world');
+///////////////////////////////////////
+///////////////////////////////////////
+
+// Selecting elements
+console.log(document.documentElement);
+console.log(document.head);
+console.log(document.body);
+
+document.querySelector('.header');
+const allSections = document.querySelectorAll('.section');
+console.log(allSections);
+
+document.getElementById('section--1');
+const allButtons = document.getElementsByTagName('button');
+console.log(allButtons);
+
+console.log(document.getElementsByClassName('btn'));
+
+// Creating and inserting elements
+// .insertAdjacentHTML
+
+const header = document.querySelector('.header'); // had to manually input otherwise error
+
+const message = document.createElement('div');
+message.classList.add('cookie-message');
+// messsage.textContent = 'We use cookies for improved functionality and analytics.';
+message.innerHTML =
+    'We use cookies for improved functionality and analytics. <button class ="btn btn--close-cookie">Got it!</button>';
+
+// header.prepend(message);
+header.append(message);
+// header.append(message.cloneNode(true));
+// header.before(message);
+// header.after(message);
+
+// Delete elements
+document.querySelector('.btn--close-cookie').addEventListener('click', function () {
+    message.remove();
+    // message.parentElement.removeChild(message); OLD WAY
+});
+
+// Styles
+message.style.backgroundColor = '#37383d';
+message.style.width = '120%';
+
+console.log(message.style.color); // empty
+console.log(message.style.backgroundColor); // works b/c inline style
+
+// getComputedStyle
+console.log(getComputedStyle(message).color);
+console.log(getComputedStyle(message).height);
+
+message.style.height = Number.parseFloat(getComputedStyle(message).height, 10) + 40 + 'px';
+
+// Setting properties
+document.documentElement.style.setProperty('--color-primary', 'orangered');
+
+// Attributes
+const logo = document.querySelector('.nav__logo');
+console.log(logo.alt);
+console.log(logo.src);
+console.log(logo.className);
+
+logo.alt = 'Beautiful minimalist logo';
+
+// Non-standard property
+console.log(logo.designer); // doesn't work
+console.log(logo.getAttribute('designer')); // works
+logo.setAttribute('company', 'Bankist');
+
+console.log(logo.src); // absolute URL version
+console.log(logo.getAttribute('src')); // relative URL version
+
+const link = document.querySelector('.nav__link--btn');
+console.log(link.href); // absolute URL
+console.log(link.getAttribute('href')); // URL as written in HTML '#'
+
+// Data attributes
+console.log(logo.dataset.versionNumber); // 3.0
+
+// Classes
+logo.classList.add('c');
+logo.classList.remove('c', 'j');
+logo.classList.toggle('c');
+logo.classList.contains('c'); // not includes
+
+// Don't use (overrides existing classes, only one class)
+// logo.className = 'jonas'
