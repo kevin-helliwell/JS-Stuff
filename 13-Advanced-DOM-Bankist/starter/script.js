@@ -36,88 +36,96 @@ document.addEventListener('keydown', function (e) {
 ///////////////////////////////////////
 ///////////////////////////////////////
 
-// Selecting elements
-console.log(document.documentElement);
-console.log(document.head);
-console.log(document.body);
+// // Selecting elements
+// console.log(document.documentElement);
+// console.log(document.head);
+// console.log(document.body);
 
-document.querySelector('.header');
-const allSections = document.querySelectorAll('.section');
-console.log(allSections);
+// document.querySelector('.header');
+// const allSections = document.querySelectorAll('.section');
+// console.log(allSections);
 
-document.getElementById('section--1');
-const allButtons = document.getElementsByTagName('button');
-console.log(allButtons);
+// document.getElementById('section--1');
+// const allButtons = document.getElementsByTagName('button');
+// console.log(allButtons);
 
-console.log(document.getElementsByClassName('btn'));
+// console.log(document.getElementsByClassName('btn'));
 
-// Creating and inserting elements
-// .insertAdjacentHTML
+// // Creating and inserting elements
+// // .insertAdjacentHTML
 
-const header = document.querySelector('.header'); // had to manually input otherwise error
+// const header = document.querySelector('.header'); // had to manually input otherwise error
 
-const message = document.createElement('div');
-message.classList.add('cookie-message');
-// messsage.textContent = 'We use cookies for improved functionality and analytics.';
-message.innerHTML =
-    'We use cookies for improved functionality and analytics. <button class ="btn btn--close-cookie">Got it!</button>';
+// const message = document.createElement('div');
+// message.classList.add('cookie-message');
+// // messsage.textContent = 'We use cookies for improved functionality and analytics.';
+// message.innerHTML =
+//     'We use cookies for improved functionality and analytics. <button class ="btn btn--close-cookie">Got it!</button>';
 
-// header.prepend(message);
-header.append(message);
-// header.append(message.cloneNode(true));
-// header.before(message);
-// header.after(message);
+// // header.prepend(message);
+// header.append(message);
+// // header.append(message.cloneNode(true));
+// // header.before(message);
+// // header.after(message);
 
-// Delete elements
-document.querySelector('.btn--close-cookie').addEventListener('click', function () {
-    message.remove();
-    // message.parentElement.removeChild(message); OLD WAY
-});
+// // Delete elements
+// document.querySelector('.btn--close-cookie').addEventListener('click', function () {
+//     message.remove();
+//     // message.parentElement.removeChild(message); OLD WAY
+// });
 
-// Styles
-message.style.backgroundColor = '#37383d';
-message.style.width = '120%';
+// // Styles
+// message.style.backgroundColor = '#37383d';
+// message.style.width = '120%';
 
-console.log(message.style.color); // empty
-console.log(message.style.backgroundColor); // works b/c inline style
+// console.log(message.style.color); // empty
+// console.log(message.style.backgroundColor); // works b/c inline style
 
-// getComputedStyle
-console.log(getComputedStyle(message).color);
-console.log(getComputedStyle(message).height);
+// // getComputedStyle
+// console.log(getComputedStyle(message).color);
+// console.log(getComputedStyle(message).height);
 
-message.style.height = Number.parseFloat(getComputedStyle(message).height, 10) + 40 + 'px';
+// message.style.height = Number.parseFloat(getComputedStyle(message).height, 10) + 40 + 'px';
 
-// Setting properties
-document.documentElement.style.setProperty('--color-primary', 'orangered');
+// // Setting properties
+// document.documentElement.style.setProperty('--color-primary', 'orangered');
 
-// Attributes
-const logo = document.querySelector('.nav__logo');
-console.log(logo.alt);
-console.log(logo.src);
-console.log(logo.className);
+// // Attributes
+// const logo = document.querySelector('.nav__logo');
+// console.log(logo.alt);
+// console.log(logo.src);
+// console.log(logo.className);
 
-logo.alt = 'Beautiful minimalist logo';
+// logo.alt = 'Beautiful minimalist logo';
 
-// Non-standard property
-console.log(logo.designer); // doesn't work
-console.log(logo.getAttribute('designer')); // works
-logo.setAttribute('company', 'Bankist');
+// // Non-standard property
+// console.log(logo.designer); // doesn't work
+// console.log(logo.getAttribute('designer')); // works
+// logo.setAttribute('company', 'Bankist');
 
-console.log(logo.src); // absolute URL version
-console.log(logo.getAttribute('src')); // relative URL version
+// console.log(logo.src); // absolute URL version
+// console.log(logo.getAttribute('src')); // relative URL version
 
-const link = document.querySelector('.nav__link--btn');
-console.log(link.href); // absolute URL
-console.log(link.getAttribute('href')); // URL as written in HTML '#'
+// const link = document.querySelector('.nav__link--btn');
+// console.log(link.href); // absolute URL
+// console.log(link.getAttribute('href')); // URL as written in HTML '#'
 
-// Data attributes
-console.log(logo.dataset.versionNumber); // 3.0
+// // Data attributes
+// console.log(logo.dataset.versionNumber); // 3.0
 
-// Classes
-logo.classList.add('c');
-logo.classList.remove('c', 'j');
-logo.classList.toggle('c');
-logo.classList.contains('c'); // not includes
+// // Classes
+// logo.classList.add('c');
+// logo.classList.remove('c', 'j');
+// logo.classList.toggle('c');
+// logo.classList.contains('c'); // not includes
 
 // Don't use (overrides existing classes, only one class)
 // logo.className = 'jonas'
+
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+btnScrollTo.addEventListener('click', function (e) {
+    const s1coords = section1.getBoundingClientRect();
+    console.log(s1coords);
+});
