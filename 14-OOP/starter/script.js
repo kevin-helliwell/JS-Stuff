@@ -50,6 +50,22 @@ console.log(jonas.species, matilda.species); // Homo Sapiens Homo Sapiens
 console.log(jonas.hasOwnProperty('firstName')); // true
 console.log(jonas.hasOwnProperty('species')); // false
 
-// Prototypal inheritance and the prototype chain
+console.log(jonas.__proto__);
+// Object .prototype (top of prototype chain)
+console.log(jonas.__proto__.__proto__);
+console.log(jonas.__proto__.__proto__.__proto__); // null
 
-// Prototypal inheritance on built-in objects
+console.log(Person.prototype.constructor);
+
+const arr = [3, 6, 6, 5, 6, 9, 9]; // new Array === []
+console.log(arr.__proto__);
+console.log(arr.__proto__ === Array.prototype); // true
+
+console.log(arr.__proto__.__proto__);
+Array.prototype.unique = function () {
+    return [...new Set(this)];
+};
+console.log(arr.unique());
+
+const h1 = document.querySelector('h1');
+console.dir((x) => x + 1);
