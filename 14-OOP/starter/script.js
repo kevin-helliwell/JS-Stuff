@@ -118,12 +118,13 @@ GOOD LUCK 😀
 // Class expression
 // const PersonCL = class {};
 
-// Class declaration
+// // Class declaration
 class PersonCl {
     constructor(fullName, birthYear) {
         this.fullName = fullName;
         this.birthYear = birthYear;
     }
+    // Instance methods
     // Methods will be added to .prototype property
     calcAge() {
         console.log(2037 - this.birthYear);
@@ -146,40 +147,49 @@ class PersonCl {
     get fullName() {
         return this._fullName;
     }
+
+    // Static method
+    static hey() {
+        console.log(`Hey there👋`);
+        console.log(this);
+    }
 }
 
-const jessica = new PersonCl('Jessica Davis', 1996);
-console.log(jessica);
-jessica.calcAge(); // 41
-console.log(jessica.age);
+// const jessica = new PersonCl('Jessica Davis', 1996);
+// console.log(jessica);
+// jessica.calcAge(); // 41
+// console.log(jessica.age);
 
-console.log(jessica.__proto__ === PersonCl.prototype); // true
+// console.log(jessica.__proto__ === PersonCl.prototype); // true
 
-// PersonCl.prototype.greet = function () {
-//     console.log(`Hey ${this.firstName}`);
+// // PersonCl.prototype.greet = function () {
+// //     console.log(`Hey ${this.firstName}`);
+// // };
+// // jessica.greet();
+
+// // 1. Classes are not hoisted
+// // 2. Classes are first-class citizens
+// // 3. Classes are executed in strict mode
+
+// const walter = new PersonCl('Walter White', 1965);
+
+// PersonCl.hey();
+
+// Getters & setters
+// const account = {
+//     owner: 'jonas',
+//     movements: [200, 530, 120, 300],
+
+//     get latest() {
+//         return this.movements.slice(-1).pop();
+//     },
+
+//     set latest(mov) {
+//         return this.movements.push(mov);
+//     },
 // };
-// jessica.greet();
 
-// 1. Classes are not hoisted
-// 2. Classes are first-class citizens
-// 3. Classes are executed in strict mode
+// console.log(account.latest);
 
-const walter = new PersonCl('Walter White', 1965);
-
-const account = {
-    owner: 'jonas',
-    movements: [200, 530, 120, 300],
-
-    get latest() {
-        return this.movements.slice(-1).pop();
-    },
-
-    set latest(mov) {
-        return this.movements.push(mov);
-    },
-};
-
-console.log(account.latest);
-
-account.latest = 50;
-console.log(account.movements);
+// account.latest = 50;
+// console.log(account.movements);
