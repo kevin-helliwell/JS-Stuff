@@ -260,3 +260,5 @@ GOOD LUCK 😀
 // ford.brake();
 // ford.speedUS = 50;
 // console.log(ford);
+
+// Inheritance between classes
