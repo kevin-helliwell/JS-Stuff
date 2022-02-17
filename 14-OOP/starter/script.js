@@ -84,30 +84,102 @@ DATA CAR 2: 'Mercedes' going at 95 km/h
 GOOD LUCK 😀
 */
 
-const Car = function (make, speed) {
-    this.make = make;
-    this.speed = speed;
+// const Car = function (make, speed) {
+//     this.make = make;
+//     this.speed = speed;
+// };
+
+// Car.prototype.accelerate = function () {
+//     this.speed += 10;
+//     console.log(this.speed);
+// };
+
+// Car.prototype.brake = function () {
+//     this.speed -= 5;
+//     console.log(this.speed);
+// };
+
+// const car1 = new Car('BMW', 120);
+// const car2 = new Car('Mercedes', 95);
+
+// console.log(car1, car2);
+
+// // Car 1
+// car1.accelerate();
+// car1.brake();
+// car1.accelerate();
+// car1.brake();
+// // Car 2
+// car2.accelerate();
+// car2.brake();
+// car2.accelerate();
+// car2.brake();
+
+// Class expression
+// const PersonCL = class {};
+
+// Class declaration
+class PersonCl {
+    constructor(fullName, birthYear) {
+        this.fullName = fullName;
+        this.birthYear = birthYear;
+    }
+    // Methods will be added to .prototype property
+    calcAge() {
+        console.log(2037 - this.birthYear);
+    }
+    greet() {
+        console.log(`Hey ${this.fullName}`);
+    }
+
+    get age() {
+        return 2037 - this.birthYear;
+    }
+
+    // Set a property that already exists
+    set fullName(name) {
+        console.log(name);
+        if (name.includes(' ')) this._fullName = name;
+        else alert(`${name} is not a full name!`);
+    }
+
+    get fullName() {
+        return this._fullName;
+    }
+}
+
+const jessica = new PersonCl('Jessica Davis', 1996);
+console.log(jessica);
+jessica.calcAge(); // 41
+console.log(jessica.age);
+
+console.log(jessica.__proto__ === PersonCl.prototype); // true
+
+// PersonCl.prototype.greet = function () {
+//     console.log(`Hey ${this.firstName}`);
+// };
+// jessica.greet();
+
+// 1. Classes are not hoisted
+// 2. Classes are first-class citizens
+// 3. Classes are executed in strict mode
+
+const walter = new PersonCl('Walter White', 1965);
+
+const account = {
+    owner: 'jonas',
+    movements: [200, 530, 120, 300],
+
+    get latest() {
+        return this.movements.slice(-1).pop();
+    },
+
+    set latest(mov) {
+        return this.movements.push(mov);
+    },
 };
 
-Car.prototype.accelerate = function () {
-    this.speed += 10;
-    console.log(this.speed);
-};
+console.log(account.latest);
 
-Car.prototype.brake = function () {
-    this.speed -= 5;
-    console.log(this.speed);
-};
-
-const car1 = new Car('BMW', 120);
-const car2 = new Car('Mercedes', 95);
-
-console.log(car1, car2);
-
-// Car 1
-car1.accelerate();
-car1.brake();
-
-// Car 2
-car2.accelerate();
-car2.brake();
+account.latest = 50;
+console.log(account.movements);
