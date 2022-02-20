@@ -486,15 +486,18 @@ class Account {
 
     deposit(val) {
         this.#movements.push(val);
+        return this;
     }
     withdraw(val) {
         this.deposit(-val);
+        return this;
     }
 
     requestLoan(val) {
         if (this._approveLoan(val)) {
             this.deposit(val);
             console.log(`Loan approved`);
+            return this;
         }
     }
 
@@ -525,4 +528,6 @@ const acc1 = new Account('Jonas', 'EUR', 1111);
 
 // Account.helper();
 
-// Chaining methods
+// Chaining methods (return this;)
+// acc1.deposit(300).deposit(500).withdraw(35).requestLoan(25000).withdraw(4000);
+// console.log(acc1.getMovements());
