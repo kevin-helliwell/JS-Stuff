@@ -257,3 +257,5 @@ class App {
 }
 
 const app = new App();
+
+console.log(`hello world`);
