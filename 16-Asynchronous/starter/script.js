@@ -48,11 +48,11 @@ function getCountryData(countryName) {
     });
 }
 
-getCountryData('spain');
-getCountryData('estonia');
-getCountryData('lebanon');
-getCountryData('usa');
-getCountryData('iceland');
+// getCountryData('spain');
+// getCountryData('estonia');
+// getCountryData('lebanon');
+// getCountryData('usa');
+// getCountryData('iceland');
 getCountryData('canada');
 
 const renderCountry = function (data, className = '') {
@@ -114,4 +114,5 @@ const getCountryAndNeighbour = function (country) {
     });
 };
 
-getCountryAndNeighbour('iraq');
+// getCountryAndNeighbour('iraq');
+getCountryAndNeighbour('canada');
