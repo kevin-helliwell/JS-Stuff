@@ -51,3 +51,6 @@ function getCountryData(countryName) {
 getCountryData('spain');
 getCountryData('estonia');
 getCountryData('lebanon');
+getCountryData('usa');
+getCountryData('iceland');
+getCountryData('canada');
