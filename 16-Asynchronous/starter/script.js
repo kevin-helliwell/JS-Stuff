@@ -391,47 +391,47 @@ GOOD LUCK 😀
 // );
 // console.log('Getting position');
 
-const getPosition = function () {
-    return new Promise(function (resolve, reject) {
-        // navigator.geolocation.getCurrentPosition(
-        //     position => resolve(position),
-        //     err => reject(err)
-        // );
-        navigator.geolocation.getCurrentPosition(resolve, reject); // <- Does same thing as upper 4 lines^^^^
-    });
-};
+// const getPosition = function () {
+//     return new Promise(function (resolve, reject) {
+//         // navigator.geolocation.getCurrentPosition(
+//         //     position => resolve(position),
+//         //     err => reject(err)
+//         // );
+//         navigator.geolocation.getCurrentPosition(resolve, reject); // <- Does same thing as upper 4 lines^^^^
+//     });
+// };
 
-getPosition().then(pos => console.log(pos));
+// getPosition().then(pos => console.log(pos));
 
-const whereAmI = function () {
-    getPosition()
-        .then(pos => {
-            const {latitude: lat, longitude: lng} = pos.coords;
+// const whereAmI = function () {
+//     getPosition()
+//         .then(pos => {
+//             const {latitude: lat, longitude: lng} = pos.coords;
 
-            return fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
-        })
-        .then(res => {
-            if (!res.ok) throw new Error(`Problem with geocoding ${res.status}`);
-            return res.json();
-        })
-        .then(data => {
-            console.log(data);
-            console.log(`You are in ${data.city}, ${data.country}.`);
+//             return fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
+//         })
+//         .then(res => {
+//             if (!res.ok) throw new Error(`Problem with geocoding ${res.status}`);
+//             return res.json();
+//         })
+//         .then(data => {
+//             console.log(data);
+//             console.log(`You are in ${data.city}, ${data.country}.`);
 
-            return fetch(`https://restcountries.com/v3.1/name/${data.country}`);
-        })
-        .then(res => {
-            console.log(res);
+//             return fetch(`https://restcountries.com/v3.1/name/${data.country}`);
+//         })
+//         .then(res => {
+//             console.log(res);
 
-            if (!res.ok) throw new Error(`Country not found (${res.status})`);
+//             if (!res.ok) throw new Error(`Country not found (${res.status})`);
 
-            return res.json();
-        })
-        .then(data => renderCountry(data[0]))
-        .catch(error => console.error(`${error.message} 🍎`));
-};
+//             return res.json();
+//         })
+//         .then(data => renderCountry(data[0]))
+//         .catch(error => console.error(`${error.message} 🍎`));
+// };
 
-btn.addEventListener('click', whereAmI);
+// btn.addEventListener('click', whereAmI);
 
 // Coding Challenge #2
 
@@ -502,3 +502,36 @@ GOOD LUCK 😀
 //         currentImg.style.display = 'none';
 //     })
 //     .catch(err => console.error(err));
+
+// Consuming Promises with Async/Await
+
+const getPosition = function () {
+    return new Promise(function (resolve, reject) {
+        navigator.geolocation.getCurrentPosition(resolve, reject);
+    });
+};
+
+// OLD WAY ->
+// fetch(`https://restcountries.com/v3.1/name/${country}`).then(res => console.log(res));
+// <- OLD WAY
+
+// NEW WAY ->
+const whereAmI = async function () {
+    // Geolocation
+    const pos = await getPosition();
+    const {latitude: lat, longitude: lng} = pos.coords;
+
+    // Reverse geocoding
+    const resGeo = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
+    const dataGeo = await resGeo.json();
+    console.log(dataGeo);
+
+    // Country data
+    const res = await fetch(`https://restcountries.com/v3.1/name/${dataGeo.country}`);
+    const data = await res.json();
+    console.log(data);
+    renderCountry(data[0]);
+};
+// <- NEW WAY
+whereAmI();
+console.log('FIRST');
