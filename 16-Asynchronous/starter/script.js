@@ -526,19 +526,21 @@ const whereAmI = async function () {
         // Reverse geocoding
         const resGeo = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
         if (!resGeo.ok) throw new Error('Problem getting location data');
-
         const dataGeo = await resGeo.json();
-        console.log(dataGeo);
 
         // Country data
         const res = await fetch(`https://restcountries.com/v3.1/name/${dataGeo.country}`);
         if (!res.ok) throw new Error('Problem getting country');
         const data = await res.json();
-        console.log(data);
         renderCountry(data[0]);
+
+        return `You are in ${dataGeo.city}, ${dataGeo.country}`;
     } catch (err) {
         console.error(`${err} 💩`);
         renderError(`💩 ${err.message}`);
+
+        // Reject promise returned from async function
+        throw err;
     }
 };
 // <- NEW WAY + ERROR HANDLING
@@ -557,3 +559,29 @@ const whereAmI = async function () {
 // } catch (err) {
 //     alert(err.message);
 // }
+
+// Returning values from async functions
+// console.log('1: Will get location');
+// const city = whereAmI();
+// console.log(city);
+
+// Mixed (async + old) style
+// console.log('1: Will get location');
+// whereAmI()
+//     .then(city => console.log(`2: ${city}`))
+//     .catch(err => console.error(`2: ${err.message} 💩`))
+//     .finally(() => console.log('3: Finished getting location'));
+
+// New (async only) style
+console.log('1: Will get location');
+(async function () {
+    try {
+        const city = await whereAmI();
+        console.log(`2: ${city}`);
+    } catch (err) {
+        console.error(`2: ${err.message} 💩`);
+    }
+    console.log('3: Finished getting location');
+})();
+
+// Running promises in parallel
