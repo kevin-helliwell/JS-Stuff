@@ -573,15 +573,37 @@ const whereAmI = async function () {
 //     .finally(() => console.log('3: Finished getting location'));
 
 // New (async only) style
-console.log('1: Will get location');
-(async function () {
-    try {
-        const city = await whereAmI();
-        console.log(`2: ${city}`);
-    } catch (err) {
-        console.error(`2: ${err.message} 💩`);
-    }
-    console.log('3: Finished getting location');
-})();
+// console.log('1: Will get location');
+// (async function () {
+//     try {
+//         const city = await whereAmI();
+//         console.log(`2: ${city}`);
+//     } catch (err) {
+//         console.error(`2: ${err.message} 💩`);
+//     }
+//     console.log('3: Finished getting location');
+// })();
 
 // Running promises in parallel
+const get3Countries = async function (c1, c2, c3) {
+    try {
+        // OLD WAY ->
+        // const [data1] = await getJSON(`https:restcountries.com/v3.1/name/${c1}`);
+        // const [data2] = await getJSON(`https:restcountries.com/v3.1/name/${c2}`);
+        // const [data3] = await getJSON(`https:restcountries.com/v3.1/name/${c3}`);
+        // console.log([data1.capital, data2.capital, data3.capital]);
+        // <- OLD WAY
+
+        // NEW WAY (PROMISES IN PARALLEL) ->
+        const data = await Promise.all([
+            getJSON(`https:restcountries.com/v3.1/name/${c1}`),
+            getJSON(`https:restcountries.com/v3.1/name/${c2}`),
+            getJSON(`https:restcountries.com/v3.1/name/${c3}`),
+        ]);
+        // <- NEW WAY (PROMISES IN PARALLEL)
+        console.log(data.map(d => d[0].capital));
+    } catch (err) {
+        console.error(err);
+    }
+};
+get3Countries('portugal', 'canada', 'tanzania');
