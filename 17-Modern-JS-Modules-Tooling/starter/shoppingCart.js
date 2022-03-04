@@ -1,5 +1,5 @@
 // Exporting module
-console.log('Exporting module');
+// console.log('Exporting module');
 
 // Blocking code
 // console.log('Start fetching users');
