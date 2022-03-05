@@ -93,3 +93,4 @@ const state = {
 };
 const stateClone = Object.assign({}, state);
 console.log(stateClone);
+console.log('hello world');
