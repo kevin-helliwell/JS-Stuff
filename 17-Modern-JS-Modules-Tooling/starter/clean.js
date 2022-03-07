@@ -57,5 +57,5 @@ const logBigExpenses = function (bigLimit) {
     output = output.slice(0, -2); // Remove last '/ '
     console.log(output);
 };
-console.log(budget);
+
 logBigExpenses(1000);
