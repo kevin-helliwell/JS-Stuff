@@ -33,13 +33,19 @@ const newBudget1 = addExpense(budget, spendingLimits, 10, 'Pizza 🍕');
 const newBudget2 = addExpense(newBudget1, spendingLimits, 100, 'Going to movies 🍿', 'Matilda');
 const newBudget3 = addExpense(newBudget2, spendingLimits, 200, 'Stuff', 'Jay');
 
-const checkExpenses = function (state, limits) {
-    return state.map(entry => {
-        return entry.value < -getLimit(limits, entry.user) ? {...entry, flag: 'limit'} : entry;
-    });
-    // for (const entry of newBudget3)
-    //     if (entry.value < -getLimit(limits, entry.user)) entry.flag = 'limit';
-};
+// const checkExpenses2 = function (state, limits) {
+//     return state.map(entry => {
+//         return entry.value < -getLimit(limits, entry.user) ? {...entry, flag: 'limit'} : entry;
+//     });
+//     // for (const entry of newBudget3)
+//     //     if (entry.value < -getLimit(limits, entry.user)) entry.flag = 'limit';
+// };
+
+const checkExpenses = (state, limits) =>
+    state.map(entry =>
+        entry.value < -getLimit(limits, entry.user) ? {...entry, flag: 'limit'} : entry
+    );
+
 const finalBudget = checkExpenses(newBudget3, spendingLimits);
 console.log(finalBudget);
 
